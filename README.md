@@ -1,10 +1,9 @@
-JSON:API
+LI:API
 ========
 
-Documentation for the [application/vnd.api+json media
-type](http://www.iana.org/assignments/media-types/application/vnd.api+json),
+Documentation for the [application/json](https://www.iana.org/assignments/media-types/media-types.xhtml),
 a specification for APIs that use JSON. This repository is the
-source code for [http://jsonapi.org](http://jsonapi.org).
+source code for [http://lojaintegrada.github.io/li-api-specification](http://lojaintegrada.github.io/li-api-specification).
 
 
 Resources
@@ -35,9 +34,3 @@ This standard is currently under development. To assist:
 The website is automatically built by [GitHub Pages](http://pages.github.com)
 when changes are pushed to the `gh-pages` branch.
 
-Archive
--------
-
-older versions of the JSON:API documentations
-
-* RC3 - http://jsonapi-rc3.herokuapp.com/

@@ -1,4 +1,4 @@
-url: http://jsonapi.org
+url: http://lojaintegrada.github.io/li-api-specification
 source: .
 destination: ./public
 
@@ -95,24 +95,16 @@ navigation:
   url: /
 - title: Specification
   url: /format/
-- title: Extensions
-  url: /extensions/
 - title: Recommendations
   url: /recommendations/
 - title: Examples
   url: /examples/
-- title: Implementations
-  url: /implementations/
-- title: FAQ
-  url: /faq/
-- title: About
-  url: /about/
 
 quicklinks:
 - title: View the specification
   url: /format/
 - title: Contribute on GitHub
-  url: https://github.com/json-api/json-api
+  url: https://github.com/lojaintegrada/li-api-specification
 
 profile_categories:
   - Pagination

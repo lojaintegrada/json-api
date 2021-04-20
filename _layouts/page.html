@@ -18,7 +18,7 @@
     {% else %}
       {% assign page_title = page.title %}
     {% endif %}
-    <title>JSON:API &mdash; {{ page_title|strip }}</title>
+    <title>LI:API &mdash; {{ page_title|strip }}</title>
   </head>
 
   <body>
@@ -26,7 +26,7 @@
     {% if page.show_masthead %}
       <header>
         <div class="content">
-          <h1 id="json-api">JSON:API</h1>
+          <h1 id="json-api">LI:API</h1>
           <h2>A specification for building APIs in JSON</h2>
           <div class="quicklinks">
             {% for link in site.quicklinks %}
@@ -56,12 +56,6 @@
                     {% if page.is_latest_version %}selected{% endif %}
                   >
                     Latest Version (v{{ site.latest_version }})
-                  </option>
-                  <option
-                    value="/format/{{ site.latest_version|plus:0.1 }}/"
-                    {% if page.version > site.latest_version %}selected{% endif %}
-                  >
-                    Upcoming Version (v{{ site.latest_version|plus:0.1 }})
                   </option>
                   <optgroup label="Old Versions/Permalinks">
                     {% assign sorted_formats = site.format|sort:'version' %}
