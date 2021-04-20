@@ -1,4 +1,5 @@
-url: http://lojaintegrada.github.io/li-api-specification
+url: http://lojaintegrada.github.io
+baseurl: /li-api-specification
 source: .
 destination: ./public
 
@@ -92,17 +93,17 @@ announcement: ""
 
 navigation:
 - title: JSON API
-  url: /
+  url: /li-api-specification
 - title: Specification
-  url: /format/
+  url: /li-api-specification/format/
 - title: Recommendations
-  url: /recommendations/
+  url: /li-api-specification/recommendations/
 - title: Examples
-  url: /examples/
+  url: /li-api-specification/examples/
 
 quicklinks:
 - title: View the specification
-  url: /format/
+  url: /li-api-specification/format/
 - title: Contribute on GitHub
   url: https://github.com/lojaintegrada/li-api-specification
 
