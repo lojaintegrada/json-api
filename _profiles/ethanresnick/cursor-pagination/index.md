@@ -44,9 +44,9 @@ extended_description: |
   Other combinations are possible, and these parameters are described more below.
 
 # If your profile defines values that can only be used in document members that
-# were introduced after JSON:API v1.0, change the minimum_jsonapi_version field
+# were introduced after LI:API v1.0, change the minimum_jsonapi_version field
 # and fill in the minimum_jsonapi_version_explanation field with an explanation
-# of the features you're relying on from the JSON:API version you've indicated.
+# of the features you're relying on from the LI:API version you've indicated.
 minimum_jsonapi_version: 1.0
 minimum_jsonapi_version_explanation:
 
@@ -320,10 +320,10 @@ However, if our server's max page size was 1, or the client included
 ## Terms
 This profile uses the following terms to refer to different document elements:
 
-1. <a id="terms-paginated-data"></a>paginated data: an array in a JSON:API
+1. <a id="terms-paginated-data"></a>paginated data: an array in a LI:API
   response document that holds the results that were extracted from a full list
   of results being paginated. It is always the value of a `data` key. When the
-  [primary data](https://jsonapi.org/format/#document-top-level) is being
+  [primary data](https://lojaintegrada.github.io/li-api-specification/format/#document-top-level) is being
   paginated, the value of the document's top-level `data` key is paginated data.
   When the resource identifier objects in a relationship are being paginated,
   the value of the `data` key in the relationship object is paginated data.
@@ -385,12 +385,12 @@ GET /people?page[size]=1
 ```
 
 ## <a id="document-page-meta"></a> `page` Meta Object Members
-This profile reserves a `page` member in every JSON:API-defined `meta` object.
+This profile reserves a `page` member in every LI:API-defined `meta` object.
 (Each of these `page` members constitutes an element defined by this profile,
-so they can be [aliased](https://jsonapi.org/format/1.1/#profile-keywords-and-aliases).)
+so they can be [aliased](https://lojaintegrada.github.io/li-api-specification/format/1.1/#profile-keywords-and-aliases).)
 
 The `page` member, when present, **MUST** hold an object as its value; any other
-values are [unrecognized](https://jsonapi.org/format/1.1/#profiles-processing).
+values are [unrecognized](https://lojaintegrada.github.io/li-api-specification/format/1.1/#profiles-processing).
 The recognized keys/values in these various `page` objects are defined throughout
 this specification.
 
@@ -423,8 +423,8 @@ With this response, clients could use `page[before]=someOpaqueString` or
 `page[after]=someOpaqueString` to paginate from person 3 in either direction.
 
 ## Links
-JSON:API allows four types of pagination links: [`prev`, `next`, `first`, and
-`last`](https://jsonapi.org/format/#fetching-pagination).
+LI:API allows four types of pagination links: [`prev`, `next`, `first`, and
+`last`](https://lojaintegrada.github.io/li-api-specification/format/#fetching-pagination).
 
 It is **RECOMMENDED** that servers include `first` and `last` links when these
 are inexpensive to compute.
@@ -514,11 +514,11 @@ the exact total is costly.
 ## <a id="errors-unsupported-sort"></a> Unsupported Sort Error
 The server **MUST** respond to this error by sending a `400 Bad Request`. The
 response document **MUST** contain an error object that identifies the `sort`
-parameter as the [error's `source`](https://jsonapi.org/format/#error-objects),
+parameter as the [error's `source`](https://lojaintegrada.github.io/li-api-specification/format/#error-objects),
 and has a `type` link of:
 
 ```
-https://jsonapi.org/profiles/ethanresnick/cursor-pagination/unsupported-sort
+https://lojaintegrada.github.io/li-api-specification/profiles/ethanresnick/cursor-pagination/unsupported-sort
 ```
 
 
@@ -532,10 +532,10 @@ response document **MUST** contain an error object that:
 - includes a `type` link of:
 
   ```
-  https://jsonapi.org/profiles/ethanresnick/cursor-pagination/max-size-exceeded
+  https://lojaintegrada.github.io/li-api-specification/profiles/ethanresnick/cursor-pagination/max-size-exceeded
   ```
 
-If this profile's `page` element has not been [aliased](https://jsonapi.org/format/1.1/#profile-keywords-and-aliases),
+If this profile's `page` element has not been [aliased](https://lojaintegrada.github.io/li-api-specification/format/1.1/#profile-keywords-and-aliases),
 the error object might look like:
 
 ```
@@ -550,7 +550,7 @@ the error object might look like:
     "parameter": "page[size]"
   },
   "links": {
-    "type": ["https://jsonapi.org/profiles/ethanresnick/cursor-pagination/max-size-exceeded"]
+    "type": ["https://lojaintegrada.github.io/li-api-specification/profiles/ethanresnick/cursor-pagination/max-size-exceeded"]
   }
 }
 ```
@@ -578,7 +578,7 @@ The server **MUST** respond to this error by sending a `400 Bad Request`. The
 response document **MUST** contain an error object that has a `type` link of:
 
 ```
-https://jsonapi.org/profiles/ethanresnick/cursor-pagination/range-pagination-not-supported
+https://lojaintegrada.github.io/li-api-specification/profiles/ethanresnick/cursor-pagination/range-pagination-not-supported
 ```
 
 # Notes

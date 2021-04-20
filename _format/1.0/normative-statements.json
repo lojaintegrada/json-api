@@ -14,7 +14,7 @@ layout: null
         "title": "Content Negotiation"
       },
       "links": {
-        "self": "http://jsonapi.org/format/#content-negotiation"
+        "self": "http://lojaintegrada.github.io/li-api-specification/format/#content-negotiation"
       },
       "relationships": {
         "statements": {
@@ -36,7 +36,7 @@ layout: null
         "title": "Document Structure"
       },
       "links": {
-        "self": "http://jsonapi.org/format/#document-structure"
+        "self": "http://lojaintegrada.github.io/li-api-specification/format/#document-structure"
       },
       "relationships": {
         "statements": {
@@ -89,7 +89,11 @@ layout: null
             { "id": "member-name-globally-allowed", "type": "normative-statements" },
             { "id": "member-name-url-safe", "type": "normative-statements" },
             { "id": "member-name-allowed-characters", "type": "normative-statements" },
-            { "id": "member-name-reserved-characters", "type": "normative-statements" }
+            { "id": "member-name-reserved-characters", "type": "normative-statements" },
+            { "id": "member-name-at-members-definition", "type": "normative-statements" },
+            { "id": "member-name-at-members-where", "type": "normative-statements" },
+            { "id": "member-name-at-members-no-process", "type": "normative-statements" },
+            { "id": "member-name-at-members-ignore-for-definitions", "type": "normative-statements" }
           ]
         }
       }
@@ -101,7 +105,7 @@ layout: null
         "title": "Fetching Data"
       },
       "links": {
-        "self": "http://jsonapi.org/format/#fetching"
+        "self": "http://lojaintegrada.github.io/li-api-specification/format/#fetching"
       },
       "relationships": {
         "statements": {
@@ -159,7 +163,7 @@ layout: null
         "title": "Creating, Updating and Deleting Resources"
       },
       "links": {
-        "self": "http://jsonapi.org/format/#crud"
+        "self": "http://lojaintegrada.github.io/li-api-specification/format/#crud"
       },
       "relationships": {
         "statements": {
@@ -255,7 +259,7 @@ layout: null
         "title": "Query Parameters"
       },
       "links": {
-        "self": "http://jsonapi.org/format/#query-parameters"
+        "self": "http://lojaintegrada.github.io/li-api-specification/format/#query-parameters"
       },
       "relationships": {
         "statements": {
@@ -274,7 +278,7 @@ layout: null
         "title": "Errors"
       },
       "links": {
-        "self": "http://jsonapi.org/format/#errors"
+        "self": "http://lojaintegrada.github.io/li-api-specification/format/#errors"
       },
       "relationships": {
         "statements": {
@@ -294,7 +298,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Clients **MUST** send all JSON:API data in request documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
+        "description": "Clients **MUST** send all LI:API data in request documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
       },
       "relationships": {
         "section": {
@@ -307,7 +311,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Clients that include the JSON:API media type in their `Accept` header **MUST** specify the media type there at least once without any media type parameters."
+        "description": "Clients that include the LI:API media type in their `Accept` header **MUST** specify the media type there at least once without any media type parameters."
       },
       "relationships": {
         "section": {
@@ -333,7 +337,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Servers **MUST** send all JSON:API data in response documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
+        "description": "Servers **MUST** send all LI:API data in response documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
       },
       "relationships": {
         "section": {
@@ -359,7 +363,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Servers **MUST** respond with a `406 Not Acceptable` status code if a request's `Accept` header contains the JSON:API media type and all instances of that media type are modified with media type parameters."
+        "description": "Servers **MUST** respond with a `406 Not Acceptable` status code if a request's `Accept` header contains the LI:API media type and all instances of that media type are modified with media type parameters."
       },
       "relationships": {
         "section": {
@@ -398,7 +402,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "A JSON object MUST be at the root of every JSON:API request and response containing data. This object defines a document's \"top level\"."
+        "description": "A JSON object MUST be at the root of every LI:API request and response containing data. This object defines a document's \"top level\"."
       },
       "relationships": {
         "section": {
@@ -515,7 +519,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "In addition, a resource object MAY contain any of these top-level members:\\n\\n- `attributes`: an attributes object representing some of the resource's data.\\n- `relationships`: a relationships object describing relationships between the resource and other JSON:API resources.\\n -`links`: a links object containing links related to the resource.\\n- `meta`: a meta object containing non-standard meta-information about a resource that can not be represented as an attribute or relationship."
+        "description": "In addition, a resource object MAY contain any of these top-level members:\\n\\n- `attributes`: an attributes object representing some of the resource's data.\\n- `relationships`: a relationships object describing relationships between the resource and other LI:API resources.\\n -`links`: a links object containing links related to the resource.\\n- `meta`: a meta object containing non-standard meta-information about a resource that can not be represented as an attribute or relationship."
       },
       "relationships": {
         "section": {
@@ -866,7 +870,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MAY",
-        "description": "A JSON:API document **MAY** include information about its implementation under a top level `jsonapi` member."
+        "description": "A LI:API document **MAY** include information about its implementation under a top level `jsonapi` member."
       },
       "relationships": {
         "section": {
@@ -892,7 +896,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MAY",
-        "description": "The jsonapi object **MAY** contain a `version` member whose value is a string indicating the highest JSON:API version supported."
+        "description": "The jsonapi object **MAY** contain a `version` member whose value is a string indicating the highest LI:API version supported."
       },
       "relationships": {
         "section": {
@@ -918,7 +922,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "All member names used in a JSON:API document **MUST** be treated as case sensitive by clients and servers"
+        "description": "All member names used in a LI:API document **MUST** be treated as case sensitive by clients and servers"
       },
       "relationships": {
         "section": {
@@ -997,6 +1001,58 @@ layout: null
       "attributes": {
         "level": "MUST",
         "description": "The following characters **MUST NOT** be used in member names:\\n\\n- U+002B PLUS SIGN, \"+\" (used for ordering)\\n- U+002C COMMA, \",\" (used separator for multiple relationship paths)\\n- U+002E PERIOD, \".\" (used as relationship path separators)\\n- U+005B LEFT SQUARE BRACKET, \"[\" (use in sparse fieldsets)\\n- U+005D RIGHT SQUARE BRACKET, \"]\" (used in sparse fieldsets)\\n- U+0021 EXCLAMATION MARK, \"!\"\\n- U+0022 QUOTATION MARK, '\"'\\n- U+0023 NUMBER SIGN, \"#\"\\n- U+0024 DOLLAR SIGN, \"$\"\\n- U+0025 PERCENT SIGN, \"%\"\\n- U+0026 AMPERSAND, \"&\"\\n- U+0027 APOSTROPHE, \"'\"\\n- U+0028 LEFT PARENTHESIS, \"(\"\\n- U+0029 RIGHT PARENTHESIS, \")\"\\n- U+002A ASTERISK, \"*\"\\n- U+002F SOLIDUS, \"/\"\\n- U+003A COLON, \":\"\\n- U+003B SEMICOLON, \";\"\\n- U+003C LESS-THAN SIGN, \"<\"\\n- U+003D EQUALS SIGN, \"=\"\\n- U+003E GREATER-THAN SIGN, \">\"\\n- U+003F QUESTION MARK, \"?\"\\n- U+0040 COMMERCIAL AT, \"@\"\\n- U+005C REVERSE SOLIDUS, \"\\\"\\n- U+005E CIRCUMFLEX ACCENT, \"^\"\\n- U+0060 GRAVE ACCENT, \"`\"\\n- U+007B LEFT CURLY BRACKET, \"{\"\\n- U+007C VERTICAL LINE, \"|\"\\n- U+007D RIGHT CURLY BRACKET, \"}\"\\n- U+007E TILDE, \"~\""
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-at-members-definition",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, \"@\"). Members named this way are called \"@-Members\"."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-at-members-where",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "@-Members **MAY** appear anywhere in a LI:API document."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-at-members-no-process",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "LI:API processors **MUST** completely ignore @-Members (i.e. not treat them as LI:API data)."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-at-members-ignore-for-definitions",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Moreover, the existence of @-Members **MUST** be ignored when interpreting all LI:API definitions and processing instructions given outside of the @-Members subsection."
       },
       "relationships": {
         "section": {
@@ -1516,7 +1572,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Concepts of order, as expressed in the naming of pagination links, **MUST** remain consistent with JSON:API's sorting rules."
+        "description": "Concepts of order, as expressed in the naming of pagination links, **MUST** remain consistent with LI:API's sorting rules."
       },
       "relationships": {
         "section": {
@@ -2660,7 +2716,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Error objects **MUST** be returned as an array keyed by `errors` in the top level of a JSON:API document."
+        "description": "Error objects **MUST** be returned as an array keyed by `errors` in the top level of a LI:API document."
       },
       "relationships": {
         "section": {

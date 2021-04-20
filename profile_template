@@ -12,9 +12,9 @@ extended_description: |
   page. This can be as long as you want, and can contain markdown.
 
 # If your profile defines values that can only be used in document members that
-# were introduced after JSON:API v1.0, change the minimum_jsonapi_version field
+# were introduced after LI:API v1.0, change the minimum_jsonapi_version field
 # and fill in the minimum_jsonapi_version_explanation field with an explanation
-# of the features you're relying on from the JSON:API version you've indicated.
+# of the features you're relying on from the LI:API version you've indicated.
 minimum_jsonapi_version: 1.0
 minimum_jsonapi_version_explanation:
 
@@ -47,7 +47,7 @@ Make sure you __follow the authoring guidelines__, which describe what profiles
 are and are not allowed to do, and how they should be designed to evolve over time.
 
 Those authoring guidelines are at:
-  http://jsonapi.org/format/1.1/#profiles-authoring
+  http://lojaintegrada.github.io/li-api-specification/format/1.1/#profiles-authoring
 
 Finally, it is **strongly encouraged** that your profile reuse objects,
 patterns, and key names from the main JSON API specification where appropriate.

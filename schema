@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
-  "title": "JSON:API Schema",
-  "description": "This is a schema for responses in the JSON:API format. For more, see http://jsonapi.org",
+  "title": "LI:API Schema",
+  "description": "This is a schema for responses in the LI:API format. For more, see http://lojaintegrada.github.io/li-api-specification",
   "oneOf": [
     {
       "$ref": "#/definitions/success"
@@ -122,7 +122,7 @@
       ]
     },
     "resource": {
-      "description": "\"Resource objects\" appear in a JSON:API document to represent resources.",
+      "description": "\"Resource objects\" appear in a LI:API document to represent resources.",
       "type": "object",
       "required": [
         "type",

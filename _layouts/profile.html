@@ -20,7 +20,7 @@
         </h1>
         <section>
           <h2><a href="#profile-intro" id="profile-intro" class="headerlink"></a>Introduction</h2>
-          <p>This is the specification of <a href="http://jsonapi.org/format/1.1/#profiles">a profile</a> for the JSON:API specification.</p>
+          <p>This is the specification of <a href="http://lojaintegrada.github.io/li-api-specification/format/1.1/#profiles">a profile</a> for the LI:API specification.</p>
           <p>The url for this profile is <code>{% include profile_url.md page=page %}</code>.</p>
 
           {% capture extended_description_markdown %}
@@ -32,10 +32,10 @@
           <section>
             <h2>
               <a href="#profile-jsonapi-req" id="profile-jsonapi-req" class="headerlink"></a>
-              Minimum JSON:API Version
+              Minimum LI:API Version
             </h2>
 
-            <p>This profile requires at least JSON:API version {{ page.minimum_jsonapi_version }}.</p>
+            <p>This profile requires at least LI:API version {{ page.minimum_jsonapi_version }}.</p>
             {% capture minimum_version_markdown %}
               {{ page.minimum_jsonapi_version_explanation | markdownify }}
             {% endcapture %}

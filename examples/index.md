@@ -6,130 +6,9 @@ show_sidebar: true
 
 This page contains additional examples of how to apply various parts of the specification.
 
-## <a href="#sparse-fieldsets" id="sparse-fieldsets" class="headerlink"></a> Sparse Fieldsets
-
-Examples of how [sparse fieldsets](http://jsonapi.org/format/#fetching-sparse-fieldsets) work.
-
-Basic request:
-
-```http
-GET /articles?include=author HTTP/1.1
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
-
-{
-  "data": [{
-    "type": "articles",
-    "id": "1",
-    "attributes": {
-      "title": "JSON:API paints my bikeshed!",
-      "body": "The shortest article. Ever.",
-      "created": "2015-05-22T14:56:29.000Z",
-      "updated": "2015-05-22T14:56:28.000Z"
-    },
-    "relationships": {
-      "author": {
-        "data": {"id": "42", "type": "people"}
-      }
-    }
-  }],
-  "included": [
-    {
-      "type": "people",
-      "id": "42",
-      "attributes": {
-        "name": "John",
-        "age": 80,
-        "gender": "male"
-      }
-    }
-  ]
-}
-```
-
-Request with `fields[articles]` and `fields[people]` parameters:
-
-```http
-GET /articles?include=author&fields[articles]=title,body,author&fields[people]=name HTTP/1.1
-```
-
-> Note: The above example URI shows unencoded `[` and `]` characters simply
-for readability. In practice, these characters should be percent-encoded, as
-noted in the base specification. See "[Square Brackets in Parameter Names](/format/1.1/#appendix-query-details-square-brackets)".
-
-Here we want `articles` objects to have fields `title`, `body` and `author` only and `people` objects to have `name` field only.
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
-
-{
-  "data": [{
-    "type": "articles",
-    "id": "1",
-    "attributes": {
-      "title": "JSON:API paints my bikeshed!",
-      "body": "The shortest article. Ever."
-    },
-    "relationships": {
-      "author": {
-        "data": {"id": "42", "type": "people"}
-      }
-    }
-  }],
-  "included": [
-    {
-      "type": "people",
-      "id": "42",
-      "attributes": {
-        "name": "John"
-      }
-    }
-  ]
-}
-```
-
-Pay attention to the fact that you have to add a relationship name both in `include` and `fields` (since relationships are fields too), otherwise you'll get:
-
-```http
-GET /articles?include=author&fields[articles]=title,body&fields[people]=name HTTP/1.1
-```
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
-
-{
-  "data": [{
-    "type": "articles",
-    "id": "1",
-    "attributes": {
-      "title": "JSON:API paints my bikeshed!",
-      "body": "The shortest article. Ever."
-    }
-  }],
-  "included": [
-    {
-      "type": "people",
-      "id": "42",
-      "attributes": {
-        "name": "John"
-      }
-    }
-  ]
-}
-```
-
-> Note: The above example URI shows unencoded `[` and `]` characters simply
-for readability. In practice, these characters should be percent-encoded, as
-noted in the base specification. See "[Square Brackets in Parameter Names](/format/1.1/#appendix-query-details-square-brackets)".
-
 ## <a href="#pagination" id="pagination" class="headerlink"></a> Pagination Links
 
-Example of a page-based strategy on how to add [pagination links](http://jsonapi.org/format/#fetching-pagination).
+Example of a page-based strategy on how to add [pagination links](http://lojaintegrada.github.io/li-api-specification/format/#fetching-pagination).
 
 Basic request:
 
@@ -139,7 +18,7 @@ GET /articles?page[number]=3&page[size]=1 HTTP/1.1
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "meta": {
@@ -147,18 +26,14 @@ Content-Type: application/vnd.api+json
   },
   "data": [
     {
-      "type": "articles",
       "id": "3",
-      "attributes": {
-        "title": "JSON:API paints my bikeshed!",
-        "body": "The shortest article. Ever.",
-        "created": "2015-05-22T14:56:29.000Z",
-        "updated": "2015-05-22T14:56:28.000Z"
-      }
+      "title": "LI:API paints my bikeshed!",
+      "body": "The shortest article. Ever.",
+      "created": "2015-05-22T14:56:29.000Z",
+      "updated": "2015-05-22T14:56:28.000Z"
     }
   ],
   "links": {
-    "self": "http://example.com/articles?page[number]=3&page[size]=1",
     "first": "http://example.com/articles?page[number]=1&page[size]=1",
     "prev": "http://example.com/articles?page[number]=2&page[size]=1",
     "next": "http://example.com/articles?page[number]=4&page[size]=1",
@@ -179,7 +54,7 @@ you like (`"total"`, `"count"`, etc.) or not use it at all.
 
 ## <a href="#error-objects" id="error-objects" class="headerlink"></a> Error Objects
 
-Examples of how [error objects](http://jsonapi.org/format/#error-objects) work.
+Examples of how [error objects](http://lojaintegrada.github.io/li-api-specification/format/#error-objects) work.
 
 ### <a href="#error-objects-basics" id="error-objects-basics" class="headerlink"></a> A Basic Error Object
 
@@ -189,7 +64,7 @@ by an invalid `"firstName"` attribute:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "errors": [
@@ -216,7 +91,7 @@ The `status` member represents the HTTP status code associated with the problem.
 It's very helpful when multiple errors are returned at once (see below), as the
 HTTP response itself can only have one status code. However, it can also be
 useful for single errors, to save clients the trouble of consulting the HTTP
-headers, or for using JSON:API over non-HTTP protocols, which may be officially
+headers, or for using LI:API over non-HTTP protocols, which may be officially
 supported in the near future.
 
 ### <a href="#error-objects-multiple-errors" id="error-objects-multiple-errors" class="headerlink"></a> Multiple Errors
@@ -226,7 +101,7 @@ can simply add each error to the `errors` array:
 
 ```http
 HTTP/1.1 400 Bad Request
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "errors": [
@@ -256,7 +131,7 @@ object. The example below shows multiple errors on the `"firstName"` attribute:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "errors": [
@@ -276,7 +151,7 @@ Content-Type: application/vnd.api+json
 
 > Note: in the responses above with a 422 status code, `400 Bad Request` would
 also be acceptable. ([More details.](http://stackoverflow.com/a/20215807/1261879))
-JSON:API doesn't take a position on 400 vs. 422.
+LI:API doesn't take a position on 400 vs. 422.
 
 ### <a href="#error-objects-error-codes" id="error-objects-error-codes" class="headerlink"></a> Error Codes
 
@@ -300,7 +175,7 @@ Multiple errors on `"password"` attribute, with error `code`:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "jsonapi": { "version": "1.0" },
@@ -329,20 +204,20 @@ Content-Type: application/vnd.api+json
 Notice that this response includes not only the `errors` top-level member,
 but the `jsonapi` top-level member. Error responses cannot contain the
 top-level `data` member, but can include all the other top-level members
-JSON:API defines.
+LI:API defines.
 
 Also, notice that the third error object lacks a `detail` member (perhaps
 for security). Again, all error object members are optional.
 
 ### <a href="#error-objects-source-usage" id="error-objects-source-usage" class="headerlink"></a> Advanced `source` Usage
 
-In the example below, the user is sending an invalid JSON:API
+In the example below, the user is sending an invalid LI:API
 request, because it's missing the `data` member:
 
 ```http
 PATCH /posts/1 HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 { "datum": [ ] }
 ```
@@ -351,7 +226,7 @@ Therefore, the server responds:
 
 ```http
 HTTP/1.1 422 Unprocesssable Entity
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "errors": [
@@ -389,30 +264,30 @@ The `source` member can also be used to indicate that the error originated
 from a problem with a URI query parameter, like so:
 
 ```http
-GET /api/posts/1?include=author HTTP/1.1
+GET /api/posts/1?invalid_param=author HTTP/1.1
 ```
 
 ```http
 HTTP/1.1 400 Bad Request
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "errors": [
     {
-      "source": { "parameter": "include" },
+      "source": { "parameter": "invalid_param" },
       "title":  "Invalid Query Parameter",
-      "detail": "The resource does not have an `author` relationship path."
+      "detail": "The resource does not have an `invalid_param` relationship path."
     }
   ]
 }
 ```
 
-In most cases, JSON:API requires the server to return an error when it encounters
-an invalid value for a JSON:API–defined query parameter. However, for API-specific
-query parameters (i.e. those not defined by JSON:API), a server may choose to
+In most cases, LI:API requires the server to return an error when it encounters
+an invalid value for a LI:API–defined query parameter. However, for API-specific
+query parameters (i.e. those not defined by LI:API), a server may choose to
 ignore an invalid parameter and have the request succeed, rather than respond with
 an error. [API-specific query parameters must contain one non a-z
-character.](http://jsonapi.org/format/#query-parameters)
+character.](http://lojaintegrada.github.io/li-api-specification/format/#query-parameters)
 
 Other examples of invalid parameters include: `?fields[people]=` (invalid parameter name;
 should be `fields[people]`) and `?redirect_to=http%3A%2F%2Fwww.owasp.org` (invalid parameter,
