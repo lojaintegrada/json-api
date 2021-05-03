@@ -92,7 +92,7 @@ excerpt_separator: ""
 announcement: ""
 
 navigation:
-- title: JSON API
+- title: LI API
   url: /li-api-specification
 - title: Specification
   url: /li-api-specification/format/

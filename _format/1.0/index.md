@@ -7,12 +7,7 @@ status: beta
 ## <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
 LI:API is a specification for how a client should request that resources be
-fetched or modified, and how a server should respond to those requests. LI:API
-can be easily extended with [extensions] and [profiles].
-
-LI:API is designed to minimize both the number of requests and the amount of
-data transmitted between clients and servers. This efficiency is achieved
-without compromising readability, flexibility, or discoverability.
+fetched or modified, and how a server should respond to those requests.
 
 LI:API requires use of the LI:API media type
 ([`application/json`](http://www.iana.org/assignments/media-types/application/json))
@@ -51,73 +46,18 @@ The LI:API media type is
 Clients and servers **MUST** send all LI:API payloads using the LI:API media
 type in the `Content-Type` header.
 
-Clients and servers **MUST** specify the `ext` media type parameter in the
-`Content-Type` header when they have applied one or more extensions to a
-LI:API document.
-
-Clients and servers **MUST** specify the `profile` media type parameters in the
-`Content-Type` header when they have applied one or more profiles to a LI:API
-document.
-
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
 When processing a LI:API response document, clients **MUST** ignore any
-parameters other than `ext` and `profile` parameters in the server's
-`Content-Type` header.
-
-A client **MAY** use the `ext` media type parameter in an `Accept` header to
-require that a server apply all the specified extensions to the response
-document.
-
-A client **MAY** use the `profile` media type parameter in an `Accept` header
-to request that the server apply one or more profiles to the response document.
-
-> Note: A client is allowed to send more than one acceptable media type in the
-`Accept` header, including multiple instances of the LI:API media type. This
-allows clients to request different combinations of the `ext` and `profile`
-media type parameters. A client can use [quality values](https://tools.ietf.org/html/rfc7231#section-5.3.2)
-to indicate that some combinations are less preferable than others. Media types
-specified without a qvalue are equally preferable to each other, regardless of
-their order, and are always considered more preferable than a media type with a
-qvalue less than 1.
+parameters in the server's `Content-Type` header.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
-If a request specifies the `Content-Type` header with the LI:API media type,
-servers **MUST** respond with a `415 Unsupported Media Type` status code if
-that media type contains any media type parameters other than `ext` or
-`profile`.
+Servers **MUST** send all LO:API data in response documents with the header `Content-Type: application/json` without any media type parameters.
 
-If a request specifies the `Content-Type` header with an instance of
-the LI:API media type modified by the `ext` media type parameter and that
-parameter contains an unsupported extension URI, the server **MUST** respond
-with a `415 Unsupported Media Type` status code.
+Servers **MUST** respond with a `415 Unsupported Media Type` status code if a request specifies the header `Content-Type: application/json` with any media type parameters.
 
-> Note: LI:API servers that do not support version 1.1 of this specification
-  will respond with a `415 Unsupported Media Type` client error if the `ext` or
-  `profile` media type parameter is present.
-
-If a request's `Accept` header contains an instance of the LI:API media type,
-servers **MUST** respond with a `406 Not Acceptable` status code if all
-instances of that media type are modified with a media type parameter other
-than `ext` or `profile`. If every instance of that media type is modified by the
-`ext` parameter and each contains at least one unsupported extension URI, the
-server **MUST** also respond with a `406 Not Acceptable`.
-
-If the `profile` parameter is received, a server **SHOULD** attempt to apply any
-requested profile(s) to its response. A server **MUST** ignore any profiles
-that it does not recognize.
-
-> Note: The above rules guarantee strict agreement on extensions between the
-  client and server, while the application of profiles is left to the discretion
-  of the server.
-
-Servers that support the `ext` or `profile` media type parameters **SHOULD**
-specify the `Vary` header with `Accept` as one of its values. This applies to
-responses with and without any [profiles] or [extensions] applied.
-
-> Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header
-unless specifically configured to respect it.
+Servers **MUST** respond with a `406 Not Acceptable status` code if a request’s Accept header contains the LI:API media type and all instances of that media type are modified with media type parameters.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
@@ -129,13 +69,8 @@ Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
 called out below.
 
-Extensions **MAY** define new members within the document structure. These
-members **MUST** comply with the naming requirements specified
-[below](#extension-members).
-
-Unless otherwise noted, objects defined by this specification or any applied
-extensions **MUST NOT** contain any additional members. Client and server
-implementations **MUST** ignore non-compliant members.
+Unless otherwise noted, objects defined by this specification **MUST NOT** contain any
+additional members. Client and server implementations **MUST** ignore non-compliant members.
 
 > Note: These conditions allow this specification to evolve through additive
 changes.
@@ -178,13 +113,11 @@ For example, the following primary data is a single resource object:
 ```json
 {
   "data": {
-    "type": "articles",
     "id": "1",
-    "attributes": {
-      // ... this article's attributes
-    },
-    "relationships": {
-      // ... this article's relationships
+    "name": "full name",
+    "author": {
+      "id": "1",
+      "name": "author name"
     }
   }
 }
@@ -230,10 +163,6 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
-##### <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a> Attributes
-
-TO DO
-
 ##### <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a> Relationships
 
 TO DO
@@ -241,21 +170,15 @@ TO DO
 A "resource identifier object" is an object that identifies an individual
 resource.
 
-A "resource identifier object" **MUST** contain a `type` member. It **MUST**
-also contain an `id` member, except when it represents a new resource to be
-created on the server. In this case, a `lid` member **MUST** be included that
-identifies the new resource.
+A "resource identifier object" **MUST** contain an `id` member, except when it 
+represents a new resource to be created on the server.
 
-The values of the `id`, `type`, and `lid` members **MUST** be strings.
-
-A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
-contains non-standard meta-information.
+The values of the `id` **MUST** be strings.
 
 ### <a href="#document-member-names" id="document-member-names" class="headerlink"></a> Member Names
 
-Implementation and profile defined member names used in a LI:API document
-**MUST** be treated as case sensitive by clients and servers, and they **MUST**
-meet all of the following conditions:
+Defined member names used in a LI:API document **MUST** be treated as case sensitive
+by clients and servers, and they **MUST** meet all of the following conditions:
 
 - Member names **MUST** contain at least one character.
 - Member names **MUST** contain only the allowed characters listed below.
@@ -311,8 +234,6 @@ Accept: application/json
 
 ##### <a href="#fetching-resources-responses-200" id="fetching-resources-responses-200" class="headerlink"></a> 200 OK
 
-TO DO: remodelar exemplo
-
 A server **MUST** respond to a successful request to fetch an individual
 resource or resource collection with a `200 OK` response.
 
@@ -327,21 +248,13 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "links": {
-    "self": "http://example.com/articles"
-  },
   "data": [{
     "type": "articles",
     "id": "1",
-    "attributes": {
-      "title": "LI:API paints my bikeshed!"
-    }
+    "title": "LI:API paints my bikeshed!"
   }, {
-    "type": "articles",
     "id": "2",
-    "attributes": {
-      "title": "Rails is Omakase"
-    }
+    "title": "Rails is Omakase"
   }]
 }
 ```
@@ -353,9 +266,6 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "links": {
-    "self": "http://example.com/articles"
-  },
   "data": []
 }
 ```
@@ -379,21 +289,12 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "links": {
-    "self": "http://example.com/articles/1"
-  },
   "data": {
     "type": "articles",
     "id": "1",
-    "attributes": {
-      "title": "LI:API paints my bikeshed!"
-    },
-    "relationships": {
-      "author": {
-        "links": {
-          "related": "http://example.com/articles/1/author"
-        }
-      }
+    "title": "LI:API paints my bikeshed!",
+    "author": {
+      "id": "1"
     }
   }
 }
@@ -407,9 +308,6 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "links": {
-    "self": "http://example.com/articles/1/author"
-  },
   "data": null
 }
 ```
@@ -452,8 +350,6 @@ Accept: application/json
 
 ##### <a href="#fetching-relationships-responses-200" id="fetching-relationships-responses-200" class="headerlink"></a> 200 OK
 
-TO DO: remodelar exemplo
-
 A server **MUST** respond to a successful request to fetch a relationship
 with a `200 OK` response.
 
@@ -465,12 +361,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "links": {
-    "self": "/articles/1/relationships/author",
-    "related": "/articles/1/author"
-  },
   "data": {
-    "type": "people",
     "id": "12"
   }
 }
@@ -484,10 +375,6 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "links": {
-    "self": "/articles/1/relationships/author",
-    "related": "/articles/1/author"
-  },
   "data": null
 }
 ```
@@ -499,13 +386,9 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "links": {
-    "self": "/articles/1/relationships/tags",
-    "related": "/articles/1/tags"
-  },
   "data": [
-    { "type": "tags", "id": "2" },
-    { "type": "tags", "id": "3" }
+    { "id": "2" },
+    { "id": "3" }
   ]
 }
 ```
@@ -518,10 +401,6 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "links": {
-    "self": "/articles/1/relationships/tags",
-    "related": "/articles/1/tags"
-  },
   "data": []
 }
 ```
@@ -533,7 +412,7 @@ a relationship link URL that does not exist.
 
 > Note: This can happen when the parent resource of the relationship
 does not exist. For example, when `/articles/1` does not exist, request to
-`/articles/1/relationships/tags` returns `404 Not Found`.
+`/articles/1/tags` returns `404 Not Found`.
 
 If a relationship link URL exists but the relationship is empty, then
 `200 OK` **MUST** be returned, as described above.
@@ -637,7 +516,7 @@ remain consistent with LI:API's [sorting rules](#fetching-sorting).
 The `page` [query parameter family] is reserved for pagination. Servers and
 clients **SHOULD** use these parameters for pagination operations.
 
-> Note: JSON API is agnostic about the pagination strategy used by a server, but
+> Note: LI API is agnostic about the pagination strategy used by a server, but
 > the `page` query parameter family can be used regardless of the strategy
 > employed. For example, a page-based strategy might use query parameters such
 > as `page[number]` and `page[size]`, while a cursor-based strategy might use
@@ -653,7 +532,7 @@ TO DO: Mover seção de recomendações de filtro para a especificação e ampli
 The `filter` [query parameter family] is reserved for filtering data. Servers
 and clients **SHOULD** use these parameters for filtering operations.
 
-> Note: JSON API is agnostic about the strategies supported by a server.
+> Note: LI API is agnostic about the strategies supported by a server.
 
 ## <a href="#crud" id="crud" class="headerlink"></a> Creating, Updating and Deleting Resources
 

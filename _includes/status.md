@@ -21,7 +21,6 @@
   This page presents the latest published version of LI:API, which is
   currently version {{ site.latest_version }}. New versions of LI:API **will
   always be backwards compatible** using a _never remove, only add_ strategy.
-  Additions can be proposed in our [discussion forum](http://discuss.jsonapi.org/).
 
 {% elsif version and version > site.latest_version %}
   This page will always present the most recent text for LI:API v{{ site.latest_version|plus:0.1 }}.

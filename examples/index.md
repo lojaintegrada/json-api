@@ -22,7 +22,7 @@ Content-Type: application/json
 
 {
   "meta": {
-    "totalPages": 13
+    "total_pages": 13
   },
   "data": [
     {
@@ -46,7 +46,7 @@ Content-Type: application/json
 for readability. In practice, these characters should be percent-encoded, as
 noted in the base specification. See "[Square Brackets in Parameter Names](/format/1.1/#appendix-query-details-square-brackets)".
 
-> Note: Putting a property like `"totalPages"` in `"meta"` can be a convenient way
+> Note: Putting a property like `"total_pages"` in `"meta"` can be a convenient way
 to indicate to clients the total number of pages in a collection (as opposed to
 the `"last"` link, which simply gives the URI of the last page). However, all
 `"meta"` values are implementation-specific, so you can call this member whatever

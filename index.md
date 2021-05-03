@@ -5,15 +5,11 @@ show_masthead: true
 ---
 
 If you've ever argued with your team about the way your JSON responses
-should be formatted, LI:API can be your anti-[bikeshedding](http://bikeshed.org) tool.
+should be formatted.
 
 By following shared conventions, you can increase productivity,
 take advantage of generalized tooling, and focus on what
 matters: your application.
-
-Clients built around LI:API are able to take
-advantage of its features around efficiently caching responses,
-sometimes eliminating network requests entirely.
 
 Here's an example response from a blog that implements LI:API:
 
@@ -65,7 +61,7 @@ LI:API covers creating and updating resources as well, not just responses.
 ## <a href="#format-documentation" id="format-documentation" class="headerlink"></a> Format documentation
 
 To get started with LI:API, check out [documentation for the base
-specification](/format).
+specification](format).
 
 ## <a href="#update-history" id="update-history" class="headerlink"></a> Update history
 

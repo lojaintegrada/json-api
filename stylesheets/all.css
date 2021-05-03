@@ -237,11 +237,13 @@ header .content {
   border-bottom: 1px solid #cccccc; }
 header h1#json-api {
   text-align: center;
+  font-size: 40px;
   height: 130px;
   margin: 0;
   padding: 0;
   left: -2px;
-  background: url("../images/jsonapi.png") no-repeat center;
+  text-align: center;
+  /* background: url("../images/jsonapi.png") no-repeat center; */
   background-size: contain; }
 header h2 {
   text-align: center;
